@@ -64,7 +64,7 @@ variable "Zone2" {
     default = "us-east-1b"
 }
 
-variable "Zone1" {
+variable "Zone3" {
     default = "us-east-1c"
 }
 
