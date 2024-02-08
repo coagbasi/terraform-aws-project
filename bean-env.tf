@@ -1,42 +1,42 @@
 resource "aws_elastic_beanstalk_environment" "vprofile-bean-prod" {
-  name = "vprofile-bean-prod"
-  application = aws_elastic_beanstalk_application.terra-prod
+  name                = "vprofile-bean-prod"
+  application         = aws_elastic_beanstalk_application.terra-prod.name
   solution_stack_name = "64bit Amazon Linux 2023 v5.1.3 running Tomcat 9 Corretto 11"
-  cname_prefix = "terra-bean-prod-domain"
+  cname_prefix        = "terra-bean-prod-domain"
   setting {
-    name = "VPCId"
+    name      = "VPCId"
     namespace = "aws:ec2:vpc"
-    value = module.vpc.vpc_id
+    value     = module.vpc.vpc_id
   }
 
   setting {
-    name = "AssociatePublicIpAddress"
+    name      = "AssociatePublicIpAddress"
     namespace = "aws:ec2:vpc"
-    value = "false"
+    value     = "false"
   }
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
-    name = "IamInstanceProfile"
-    value = "aws-elbean-ec2-role"
+    name      = "IamInstanceProfile"
+    value     = "aws-elbean-ec2-role"
   }
 
   setting {
     name      = "Subnets"
     namespace = "aws:ec2:vpc"
-    value     = join(",", [module.vpc.private_subnets[0],module.vpc.private_subnets[1],module.vpc.private_subnets[2]])
+    value     = join(",", [module.vpc.private_subnets[0], module.vpc.private_subnets[1], module.vpc.private_subnets[2]])
   }
 
   setting {
     name      = "ELBSubnets"
     namespace = "aws:ec2:vpc"
-    value     = join(",", [module.vpc.public_subnets[0],module.vpc.public_subnets[1],module.vpc.public_subnets[2]])
+    value     = join(",", [module.vpc.public_subnets[0], module.vpc.public_subnets[1], module.vpc.public_subnets[2]])
   }
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
-    name = "InstanceType"
-    value = "t2.micro"
+    name      = "InstanceType"
+    value     = "t2.micro"
   }
 
   setting {
@@ -112,9 +112,9 @@ resource "aws_elastic_beanstalk_environment" "vprofile-bean-prod" {
   }
 
   setting {
-    name = "StickinessEnabled"
+    name      = "StickinessEnabled"
     namespace = "aws:elasticbeanstalk:environment:process:default"
-    value = "true"
+    value     = "true"
   }
 
   setting {
@@ -126,13 +126,13 @@ resource "aws_elastic_beanstalk_environment" "vprofile-bean-prod" {
   setting {
     name      = "SecurityGroups"
     namespace = "aws:elbv2:loadbalancer"
-    value     = aws_security_group.terraform-vpro-bean-sg
+    value     = aws_security_group.terraform-vpro-bean-sg.id
   }
 
   setting {
     name      = "SecurityGroups"
     namespace = "aws:autoscaling:launchconfiguration"
-    value     = aws_security_group.terraform-vpro-prod-sg
+    value     = aws_security_group.terraform-vpro-prod-sg.id
   }
 
   depends_on = [aws_security_group.terraform-vpro-bean-sg, aws_security_group.terraform-vpro-prod-sg]
