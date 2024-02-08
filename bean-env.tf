@@ -47,19 +47,19 @@ resource "aws_elastic_beanstalk_environment" "vprofile-bean-prod" {
 
   setting {
     name      = "Availability Zones"
-    namespace = "aws:autoscaling:asq"
+    namespace = "aws:autoscaling:asg"
     value     = "Any 3"
   }
 
   setting {
     name      = "MinSize"
-    namespace = "aws:autoscaling:asq"
+    namespace = "aws:autoscaling:asg"
     value     = "1"
   }
 
   setting {
     name      = "MaxSize"
-    namespace = "aws:autoscaling:asq"
+    namespace = "aws:autoscaling:asg"
     value     = "8"
   }
 

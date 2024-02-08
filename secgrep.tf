@@ -83,6 +83,6 @@ resource "aws_security_group_rule" "sec_grep_allow_itself" {
   from_port                = 0
   to_port                  = 65535
   protocol                 = "tcp"
-  security_group_id        = "aws_security_group.terraform-vpro-backend-sg.id"
-  source_security_group_id = "aws_security_group.terraform-vpro-backend-sg.id"
+  security_group_id        = aws_security_group.terraform-vpro-backend-sg.id
+  source_security_group_id = aws_security_group.terraform-vpro-backend-sg.id
 }
