@@ -7,14 +7,14 @@ resource "aws_security_group" "terraform-vpro-bean-sg" {
     from_port = 0
     protocol = "-1"
     to_port = 0
-    cidr_block = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
     from_port = 80
     protocol = "tcp"
     to_port = 80
-    cidr_block = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
@@ -27,14 +27,14 @@ resource "aws_security_group" "terraform-vpro-bastion-sg" {
     from_port = 0
     protocol = "-1"
     to_port = 0
-    cidr_block = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
     from_port = 22
     protocol = "tcp"
     to_port = 22
-    cidr_block = [var.MYIP]
+    cidr_blocks = [var.MYIP]
   }
 }
 
@@ -47,7 +47,7 @@ resource "aws_security_group" "terraform-vpro-prod-sg" {
     from_port = 0
     protocol = "-1"
     to_port = 0
-    cidr_block = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
@@ -67,7 +67,7 @@ resource "aws_security_group" "terraform-vpro-backend-sg" {
     from_port = 0
     protocol = "-1"
     to_port = 0
-    cidr_block = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
