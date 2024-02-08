@@ -7,7 +7,7 @@ resource "aws_db_subnet_group" "terra-vpro-rds-subgrp" {
 }
 
 resource "aws_elasticache_subnet_group" "terra-vpro-cache-subgrp" {
-  name = terra-vpro-cache-subgrp
+  name = "terra-vpro-cache-subgrp"
   subnet_ids = [module.vpc.private_subnets[0], module.vpc.private_subnets[1], module.vpc.private_subnets[2]]
   tags = {
     Name = "CACHE subnet group"
